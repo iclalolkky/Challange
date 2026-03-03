@@ -1,0 +1,20 @@
+// Tablet Ekranlar (641px - 1024px arası) [cite: 18]
+@mixin md {
+  @media (min-width: 641px) {
+    @content;
+  }
+}
+
+// Masaüstü Ekranlar (1025px ve üzeri) [cite: 18]
+@mixin lg {
+  @media (min-width: 1025px) {
+    @content;
+  }
+}
+
+// Flexbox merkezleme yapmak için
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
