@@ -2,6 +2,7 @@ import './styles/main.scss';
 import { createButton } from './components/Button/Button';
 import { createModal } from './components/Modal/Modal';
 import { createCard } from './components/Card/Card';
+import { createAccordion } from './components/Accordion/Accordion';
 
 const headerSection = document.querySelector<HTMLElement>('#header');
 
@@ -104,4 +105,36 @@ if (featuresSection) {
   container.appendChild(sectionTitle);
   container.appendChild(grid);
   featuresSection.appendChild(container);
+}
+
+const faqSectionEl = document.querySelector<HTMLElement>('#faq');
+
+if (faqSectionEl) {
+  const container = document.createElement('div');
+  container.classList.add('container', 'faq-section__container');
+
+  const sectionTitle = document.createElement('h2');
+  sectionTitle.classList.add('faq-section__title');
+  sectionTitle.textContent = 'Sıkça Sorulan Sorular';
+
+  const faqData = [
+    {
+      title: 'Bu platform ücretsiz mi?',
+      content: 'Evet, kullanılan tüm teknolojiler (Vite, TypeScript, SCSS) tamamen açık kaynaklı ve ücretsizdir.'
+    },
+    {
+      title: 'Hangi framework kullanılıyor?',
+      content: 'Hiçbir framework kullanılmıyor. Bu proje tamamen sıfır bağımlılık prensibine uygundur.'
+    },
+    {
+      title: 'Karanlık tema nasıl çalışıyor?',
+      content: 'CSS değişkenleri ve HTML root etiketindeki data-theme kullanılarak geçiş sağlanıyor.'
+    }
+  ];
+
+  const accordion = createAccordion(faqData);
+
+  container.appendChild(sectionTitle);
+  container.appendChild(accordion);
+  faqSectionEl.appendChild(container);
 }
