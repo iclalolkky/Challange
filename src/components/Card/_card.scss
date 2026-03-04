@@ -1,0 +1,28 @@
+.card {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 1rem;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  width: 100%;
+  max-width: 350px;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  }
+
+  &__content {
+    padding: 1.5rem;
+  }
+
+  &__title {
+    margin-bottom: 0.5rem;
+    color: var(--text-color);
+  }
+
+  &__description {
+    font-size: 0.875rem;
+    color: #6b7280; 
+  }
+}

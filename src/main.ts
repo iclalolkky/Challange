@@ -1,6 +1,7 @@
 import './styles/main.scss';
 import { createButton } from './components/Button/Button';
 import { createInput } from './components/Input/Input';
+import { createCard } from './components/Card/Card';
 
 // HTML #app div
 const app = document.querySelector<HTMLDivElement>('#app');
@@ -27,7 +28,13 @@ if (app) {
     required: true
   });
 
+  const featureCard = createCard({
+    title: 'Card Deneme',
+    description: 'Deneme ve Kontrol Yapıyoruzz',
+  });
+
   app.appendChild(primaryBtn);
   app.appendChild(outlineBtn);
   app.appendChild(emailInput);
+  app.appendChild(featureCard);
 }
