@@ -50,7 +50,7 @@ Projeyi yerel bilgisayarınızda incelemek için aşağıdaki adımları izleyeb
 
 ## Dökümantasyon
 
-* Mimari kararlarımızın teknik detayları için [ADR-001](https://www.google.com/search?q=docs/adr-001.md) belgesini inceleyebilirsiniz.
+* Mimari kararlarımızın teknik detayları için [ADR-001](./docs/adr-001.md) belgesini inceleyebilirsiniz.
 * Projenin gelişim süreci ve sürüm notları için [CHANGELOG.md](CHANGELOG.md) dosyasına göz atabilirsiniz.
 
 **Geliştirici:** İclal Olukkaya
