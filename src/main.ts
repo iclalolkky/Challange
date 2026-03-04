@@ -3,6 +3,7 @@ import { createButton } from './components/Button/Button';
 import { createModal } from './components/Modal/Modal';
 import { createCard } from './components/Card/Card';
 import { createAccordion } from './components/Accordion/Accordion';
+import { createInput } from './components/Input/Input';
 
 const headerSection = document.querySelector<HTMLElement>('#header');
 
@@ -137,4 +138,66 @@ if (faqSectionEl) {
   container.appendChild(sectionTitle);
   container.appendChild(accordion);
   faqSectionEl.appendChild(container);
+}
+
+const footerSectionEl = document.querySelector<HTMLElement>('#footer');
+
+if (footerSectionEl) {
+  const container = document.createElement('div');
+  container.classList.add('container', 'footer__container');
+
+  const infoDiv = document.createElement('div');
+  infoDiv.classList.add('footer__info');
+  
+  const logo = document.createElement('div');
+  logo.classList.add('footer__logo');
+  logo.textContent = 'UI.Challenge';
+
+  const copyright = document.createElement('p');
+  copyright.classList.add('footer__copyright');
+  copyright.textContent = '© 2026 Tüm hakları saklıdır. İclal Olukkaya.';
+
+  infoDiv.appendChild(logo);
+  infoDiv.appendChild(copyright);
+
+  const newsletterDiv = document.createElement('div');
+  newsletterDiv.classList.add('footer__newsletter');
+
+  const newsletterTitle = document.createElement('h3');
+  newsletterTitle.textContent = 'Bültene Abone Olun';
+
+  const formDiv = document.createElement('div');
+  formDiv.classList.add('footer__newsletter-form');
+
+  const emailInput = createInput({
+    label: '', 
+    id: 'newsletter-email',
+    type: 'email',
+    placeholder: 'ornek@sirket.com',
+    required: true
+  });
+
+  const submitBtn = createButton({
+    text: 'Abone Ol',
+    variant: 'primary',
+    onClick: () => {
+      const inputEl = emailInput.querySelector('input');
+      if (inputEl && inputEl.value.includes('@') && inputEl.value.includes('.')) {
+        alert(`Teşekkürler! ${inputEl.value} adresi bültene başarıyla kaydedildi.`);
+        inputEl.value = ''; 
+      } else {
+        alert('Lütfen geçerli bir e-posta adresi giriniz.');
+      }
+    }
+  });
+
+  formDiv.appendChild(emailInput);
+  formDiv.appendChild(submitBtn);
+
+  newsletterDiv.appendChild(newsletterTitle);
+  newsletterDiv.appendChild(formDiv);
+
+  container.appendChild(infoDiv);
+  container.appendChild(newsletterDiv);
+  footerSectionEl.appendChild(container);
 }
