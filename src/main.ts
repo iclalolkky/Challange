@@ -41,11 +41,11 @@ if (heroSection) {
 
   const title = document.createElement('h1');
   title.classList.add('hero__title');
-  title.textContent = 'Geleceğin Arayüzleri';
+  title.textContent = 'Modern, Hızlı ve Ölçeklenebilir Arayüzler';
 
   const desc = document.createElement('p');
   desc.classList.add('hero__description');
-  desc.textContent = 'Vite, Vanilla TypeScript ve SCSS kullanarak web uygulamaları geliştirin.';
+  desc.textContent = 'Sıfır bağımlılık ilkesiyle, Vanilla TypeScript ve modern SCSS mimarisi kullanılarak geliştirilmiş performans odaklı bileşen kütüphanesi. Projelerinize hız ve güvenilirlik katın.';
 
   const actions = document.createElement('div');
   actions.classList.add('hero__actions');
@@ -90,12 +90,12 @@ if (featuresSection) {
   grid.classList.add('features__grid');
 
   const featuresData = [
-    { title: 'Modüler Mimari', description: 'BEM metodolojisi ile bağımsız ve tekrar kullanılabilir bileşenler.' },
-    { title: 'Karanlık Tema', description: 'CSS değişkenleri ile tek tıkla ve saniyeler içinde gece moduna geçiş.' },
-    { title: 'Erişilebilirlik (a11y)', description: 'Ekran okuyucular ve klavye navigasyonu için ARIA etiketleriyle tam uyumluluk.' },
-    { title: 'Tip Güvenliği', description: 'Vanilla TypeScript ile hatasız, öngörülebilir ve güvenilir kod geliştirme deneyimi.' },
-    { title: 'Mobil Öncelikli', description: 'SCSS mixin\'leri ile her ekran boyutuna anında uyum sağlayan kusursuz responsive tasarım.' },
-    { title: 'Sıfır Bağımlılık', description: 'Yüksek performanslı web teknolojileri.' }
+    { title: 'Modüler Mimari', description: 'BEM metodolojisi ile tamamen izole, bağımsız ve projenizin her yerinde tekrar kullanılabilir bileşenler.' },
+    { title: 'Dinamik Tema', description: 'Gelişmiş CSS değişkenleri sayesinde tek tıkla ve saniye gecikmesi olmadan aydınlık/karanlık mod geçişi.' },
+    { title: 'Tam Erişilebilirlik', description: 'Ekran okuyucular ve klavye navigasyonu için ARIA standartlarıyla %100 uyumlu kapsayıcı tasarım.' },
+    { title: 'Maksimum Tip Güvenliği', description: 'TypeScript\'in gücüyle hatasız, öngörülebilir ve derleme aşamasında korunan güvenilir kod altyapısı.' },
+    { title: 'Mobil Öncelikli (Responsive)', description: 'Özelleştirilebilir SCSS mixin\'leri ile akıllı telefonlardan dev ekranlara kadar her cihazda kusursuz görünüm.' },
+    { title: 'Sıfır Bağımlılık (Zero-Dependency)', description: 'Dış kütüphanelerin getirdiği yük ve güvenlik açıklarından uzak, sadece saf ve yüksek performanslı web teknolojileri.' }
   ];
 
   featuresData.forEach(feature => {
@@ -124,8 +124,8 @@ if (faqSectionEl) {
       content: 'Evet, kullanılan tüm teknolojiler (Vite, TypeScript, SCSS) tamamen açık kaynaklı ve ücretsizdir.'
     },
     {
-      title: 'Hangi framework kullanılıyor?',
-      content: 'Hiçbir framework kullanılmıyor. Bu proje tamamen sıfır bağımlılık prensibine uygundur.'
+      title: 'Hangi framework kullanıldı?',
+      content: 'Hiçbir framework kullanılmadı. Bu proje tamamen sıfır bağımlılık prensibine uygundur.'
     },
     {
       title: 'Karanlık tema nasıl çalışıyor?',
