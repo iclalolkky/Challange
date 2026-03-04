@@ -1,6 +1,7 @@
 import './styles/main.scss';
 import { createButton } from './components/Button/Button';
 import { createModal } from './components/Modal/Modal';
+import { createCard } from './components/Card/Card';
 
 const headerSection = document.querySelector<HTMLElement>('#header');
 
@@ -71,4 +72,36 @@ if (heroSection) {
   container.appendChild(desc);
   container.appendChild(actions);
   heroSection.appendChild(container);
+}
+
+const featuresSection = document.querySelector<HTMLElement>('#features');
+
+if (featuresSection) {
+  const container = document.createElement('div');
+  container.classList.add('container', 'features__container');
+
+  const sectionTitle = document.createElement('h2');
+  sectionTitle.classList.add('features__title');
+  sectionTitle.textContent = 'Neden Bizi Seçmelisiniz?';
+
+  const grid = document.createElement('div');
+  grid.classList.add('features__grid');
+
+  const featuresData = [
+    { title: 'Modüler Mimari', description: 'BEM metodolojisi ile bağımsız ve tekrar kullanılabilir bileşenler.' },
+    { title: 'Karanlık Tema', description: 'CSS değişkenleri ile tek tıkla ve saniyeler içinde gece moduna geçiş.' },
+    { title: 'Erişilebilirlik (a11y)', description: 'Ekran okuyucular ve klavye navigasyonu için ARIA etiketleriyle tam uyumluluk.' },
+    { title: 'Tip Güvenliği', description: 'Vanilla TypeScript ile hatasız, öngörülebilir ve güvenilir kod geliştirme deneyimi.' },
+    { title: 'Mobil Öncelikli', description: 'SCSS mixin\'leri ile her ekran boyutuna anında uyum sağlayan kusursuz responsive tasarım.' },
+    { title: 'Sıfır Bağımlılık', description: 'Yüksek performanslı web teknolojileri.' }
+  ];
+
+  featuresData.forEach(feature => {
+    const card = createCard({ title: feature.title, description: feature.description });
+    grid.appendChild(card);
+  });
+
+  container.appendChild(sectionTitle);
+  container.appendChild(grid);
+  featuresSection.appendChild(container);
 }
