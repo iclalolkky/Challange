@@ -1,0 +1,68 @@
+.accordion {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+  max-width: 600px;
+  margin: 2rem 0;
+
+  &__item {
+    border: 1px solid var(--border-color);
+    border-radius: 0.5rem;
+    overflow: hidden;
+    background-color: var(--card-bg);
+    transition: all 0.3s ease;
+
+    &--open {
+      border-color: var(--primary-color);
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+
+      .accordion__content {
+        grid-template-rows: 1fr;
+        padding: 0 1.5rem 1.5rem 1.5rem;
+      }
+    }
+  }
+
+  &__header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--text-color);
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-align: left;
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: var(--primary-color);
+    }
+  }
+
+  &__icon {
+    font-size: 1.5rem;
+    font-weight: 300;
+    line-height: 1;
+    color: var(--primary-color);
+  }
+
+  &__content {
+    display: grid;
+    grid-template-rows: 0fr; 
+    transition: all 0.3s ease-in-out;
+    padding: 0 1.5rem; 
+
+    p {
+      overflow: hidden; 
+      color: var(--text-color);
+      opacity: 0.8;
+      line-height: 1.6;
+      margin: 0;
+    }
+  }
+}
