@@ -1,62 +1,74 @@
 import './styles/main.scss';
 import { createButton } from './components/Button/Button';
-import { createInput } from './components/Input/Input';
-import { createCard } from './components/Card/Card';
 import { createModal } from './components/Modal/Modal';
-import { createAccordion } from './components/Accordion/Accordion';
 
-// HTML #app div
-const app = document.querySelector<HTMLDivElement>('#app');
+const headerSection = document.querySelector<HTMLElement>('#header');
 
-if (app) {
-  // Primary Buton 
-  const primaryBtn = createButton({
+if (headerSection) {
+  const container = document.createElement('div');
+  container.classList.add('container', 'header');
+
+  const logo = document.createElement('div');
+  logo.classList.add('header__logo');
+  logo.textContent = 'UI.Challenge';
+
+  const themeBtn = createButton({
+    text: '🌙 Dark Mode',
+    variant: 'outline',
+    onClick: (e) => {
+      const html = document.documentElement;
+      const isDark = html.getAttribute('data-theme') === 'dark';
+      
+      html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+      
+      const target = e.currentTarget as HTMLButtonElement;
+      target.textContent = isDark ? '🌙 Dark Mode' : '☀️ Light Mode';
+    }
+  });
+
+  container.appendChild(logo);
+  container.appendChild(themeBtn);
+  headerSection.appendChild(container);
+}
+const heroSection = document.querySelector<HTMLElement>('#hero');
+
+if (heroSection) {
+  const container = document.createElement('div');
+  container.classList.add('container', 'hero');
+
+  const title = document.createElement('h1');
+  title.classList.add('hero__title');
+  title.textContent = 'Geleceğin Arayüzleri';
+
+  const desc = document.createElement('p');
+  desc.classList.add('hero__description');
+  desc.textContent = 'Vite, Vanilla TypeScript ve SCSS kullanarak web uygulamaları geliştirin.';
+
+  const actions = document.createElement('div');
+  actions.classList.add('hero__actions');
+
+  const ctaBtn = createButton({
     text: 'Hemen Başla',
     variant: 'primary',
     onClick: () => {
       const modalContent = document.createElement('p');
-      modalContent.textContent = "Harika! Gelişmeye devam ediyoruz. Kayıt formu yakında burada olacak.";
-
-      const modal = createModal({ title: 'Hoş Geldiniz!', content: modalContent });
+      modalContent.textContent = "Kayıt formu ve detaylar çok yakında eklenecek!";
+      const modal = createModal({ title: 'Aramıza Katıl', content: modalContent });
       document.body.appendChild(modal);
     }
   });
-  
-  // Outline Buton 
-  const outlineBtn = createButton({
-    text: 'Daha Fazla Bilgi',
+
+  const githubBtn = createButton({
+    text: 'GitHub\'da İncele',
     variant: 'outline',
+    onClick: () => window.open('https://github.com/iclalolkky/Challange', '_blank')
   });
 
-  const emailInput = createInput({
-    label: 'E-posta Adresiniz',
-    id: 'email-input',
-    type: 'email',
-    placeholder: 'ornek@sirket.com',
-    required: true
-  });
+  actions.appendChild(ctaBtn);
+  actions.appendChild(githubBtn);
 
-  const featureCard = createCard({
-    title: 'Modern Altyapı',
-    description: 'Vite ve TypeScript ile yüksek performanslı yazılımlar.',
-  });
-
-  const faqItems = [
-    {
-      title: 'Vite ve TypeScript neden hızlı?',
-      content: 'Vite, geliştirme sunucusunu saniyeler içinde başlatır. TypeScript ise kod yazarken hataları yakalar ve güvenli bir yapı sunar.'
-    },
-    {
-      title: 'Bileşen kütüphanesi nasıl çalışıyor?',
-      content: 'Vanilla TS ve SCSS kullanılarak, BEM metodolojisine tasarlandı.'
-    }
-  ];
-
-  const accordion = createAccordion(faqItems);
-
-  app.appendChild(primaryBtn);
-  app.appendChild(outlineBtn);
-  app.appendChild(emailInput);
-  app.appendChild(featureCard);
-  app.appendChild(accordion);
+  container.appendChild(title);
+  container.appendChild(desc);
+  container.appendChild(actions);
+  heroSection.appendChild(container);
 }
