@@ -1,5 +1,9 @@
 # UI Challenge - Landing Page 
 
+**Canlı Demo:** [challange-blue.vercel.app](https://challange-blue.vercel.app)
+
+*(Aşağıdan tüm performans, bileşen mimarisi ve Lighthouse detaylarını inceleyebilirsiniz.)*
+
 Bu proje, modern web geliştirme standartlarına uygun olarak **sıfır dış bağımlılık (zero-dependency)** prensibiyle geliştirilmiş bir UI Bileşen Kütüphanesi ve Açılış Sayfasıdır (Landing Page). 
 
 Proje, herhangi bir JavaScript framework'ü (React, Vue vb.) kullanılmadan, tamamen mühendislik temellerine sadık kalınarak inşa edilmiştir.
