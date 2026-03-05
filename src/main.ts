@@ -108,6 +108,56 @@ if (featuresSection) {
   featuresSection.appendChild(container);
 }
 
+  const pricingSection = document.createElement('section');
+  pricingSection.classList.add('pricing');
+
+  const pricingData = [
+    { 
+      title: 'Başlangıç', 
+      price: 'Ücretsiz', 
+      features: ['Temel UI Bileşenleri', 'Topluluk Desteği', 'Kişisel Kullanım'], 
+      buttonText: 'Hemen Başla', 
+      isPopular: false 
+    },
+    { 
+      title: 'Profesyonel', 
+      price: '₺2000/ay', 
+      features: ['Tüm UI Bileşenleri', 'Öncelikli Destek', 'Ticari Kullanım', 'Karanlık Tema'], 
+      buttonText: 'Satın Al', 
+      isPopular: true 
+    },
+    { 
+      title: 'Kurumsal', 
+      price: 'Özel', 
+      features: ['Özel Çözümler', '7/24 Canlı Destek', 'Eğitim ve Kurulum', 'Sınırsız Lisans'], 
+      buttonText: 'Bize Ulaşın', 
+      isPopular: false 
+    }
+  ];
+
+  pricingSection.innerHTML = `
+    <div class="container pricing__container">
+      <h2 class="pricing__title">Fiyatlandırma Seçenekleri</h2>
+      <div class="pricing__grid">
+        ${pricingData.map(plan => `
+          <div class="card pricing__card ${plan.isPopular ? 'pricing__card--popular' : ''}">
+            ${plan.isPopular ? '<div class="pricing__badge">En Çok Tercih Edilen</div>' : ''}
+            <h3 class="pricing__tier">${plan.title}</h3>
+            <div class="pricing__price">${plan.price}</div>
+            <ul class="pricing__features">
+              ${plan.features.map(f => `<li>${f}</li>`).join('')}
+            </ul>
+            <button class="button ${plan.isPopular ? 'button--primary' : 'button--outline'} pricing__button">
+              ${plan.buttonText}
+            </button>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+  `;
+
+ featuresSection?.insertAdjacentElement('afterend', pricingSection);
+
 const faqSectionEl = document.querySelector<HTMLElement>('#faq');
 
 if (faqSectionEl) {
