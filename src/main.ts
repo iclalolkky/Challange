@@ -219,6 +219,14 @@ if (footerSectionEl) {
   const formDiv = document.createElement('div');
   formDiv.classList.add('footer__newsletter-form');
 
+  const errorMsg = document.createElement('span');
+  errorMsg.style.color = '#ff6b6b';
+  errorMsg.style.fontSize = '0.85rem';
+  errorMsg.style.marginTop = '0.5rem';
+  errorMsg.style.display = 'block';
+  errorMsg.style.minHeight = '20px'; 
+  errorMsg.textContent = ''; 
+
   const emailInput = createInput({
     label: '', 
     id: 'newsletter-email',
@@ -230,18 +238,58 @@ if (footerSectionEl) {
   const submitBtn = createButton({
     text: 'Abone Ol',
     variant: 'primary',
-    onClick: () => {
+    onClick: (e) => {
+      e.preventDefault(); 
+      
       const inputEl = emailInput.querySelector('input');
-      if (inputEl && inputEl.value.includes('@') && inputEl.value.includes('.')) {
-        alert(`Teşekkürler! ${inputEl.value} adresi bültene başarıyla kaydedildi.`);
-        inputEl.value = ''; 
-      } else {
-        alert('Lütfen geçerli bir e-posta adresi giriniz.');
+      if (!inputEl) return;
+
+      const emailValue = inputEl.value.trim();
+      
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+      if (emailValue === '') {
+        errorMsg.textContent = 'Lütfen bu alanı boş bırakmayınız.';
+        inputEl.style.borderColor = '#ff6b6b';
+        return;
       }
+
+      if (!emailRegex.test(emailValue)) {
+        errorMsg.textContent = 'Lütfen geçerli bir e-posta adresi giriniz.';
+        inputEl.style.borderColor = '#ff6b6b';
+        return;
+      }
+
+      errorMsg.textContent = '';
+      inputEl.style.borderColor = '';
+      
+      const btnElement = e.currentTarget as HTMLButtonElement;
+      btnElement.textContent = 'Gönderiliyor...';
+      btnElement.disabled = true;
+      btnElement.style.opacity = '0.7';
+
+      setTimeout(() => {
+        btnElement.textContent = 'Abone Ol';
+        btnElement.disabled = false;
+        btnElement.style.opacity = '1';
+        inputEl.value = ''; 
+        const modalContent = document.createElement('p');
+        modalContent.textContent = "Bültenimize başarıyla abone oldunuz. Gelişmeleri e-posta adresinize göndereceğiz!";
+        const successModal = createModal({ title: 'Abonelik Başarılı !', content: modalContent });
+        document.body.appendChild(successModal);
+      }, 1500);
     }
   });
 
-  formDiv.appendChild(emailInput);
+  const inputContainer = document.createElement('div');
+  inputContainer.style.display = 'flex';
+  inputContainer.style.flexDirection = 'column';
+  inputContainer.style.flexGrow = '1';
+  
+  inputContainer.appendChild(emailInput);
+  inputContainer.appendChild(errorMsg);
+
+  formDiv.appendChild(inputContainer);
   formDiv.appendChild(submitBtn);
 
   newsletterDiv.appendChild(newsletterTitle);
@@ -250,4 +298,4 @@ if (footerSectionEl) {
   container.appendChild(infoDiv);
   container.appendChild(newsletterDiv);
   footerSectionEl.appendChild(container);
-}
+  }
