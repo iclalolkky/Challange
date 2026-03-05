@@ -1,24 +1,301 @@
-import './style.css'
-import typescriptLogo from './typescript.svg'
-import viteLogo from '/vite.svg'
-import { setupCounter } from './counter.ts'
+import './styles/main.scss';
+import { createButton } from './components/Button/Button';
+import { createModal } from './components/Modal/Modal';
+import { createCard } from './components/Card/Card';
+import { createAccordion } from './components/Accordion/Accordion';
+import { createInput } from './components/Input/Input';
 
-document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
-  <div>
-    <a href="https://vite.dev" target="_blank">
-      <img src="${viteLogo}" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://www.typescriptlang.org/" target="_blank">
-      <img src="${typescriptLogo}" class="logo vanilla" alt="TypeScript logo" />
-    </a>
-    <h1>Vite + TypeScript</h1>
-    <div class="card">
-      <button id="counter" type="button"></button>
+const headerSection = document.querySelector<HTMLElement>('#header');
+
+if (headerSection) {
+  const container = document.createElement('div');
+  container.classList.add('container', 'header');
+
+  const logo = document.createElement('div');
+  logo.classList.add('header__logo');
+  logo.textContent = 'UI.Challenge';
+
+  const themeBtn = createButton({
+    text: '🌙 Dark Mode',
+    variant: 'outline',
+    onClick: (e) => {
+      const html = document.documentElement;
+      const isDark = html.getAttribute('data-theme') === 'dark';
+      
+      html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+      
+      const target = e.currentTarget as HTMLButtonElement;
+      target.textContent = isDark ? '🌙 Dark Mode' : '☀️ Light Mode';
+    }
+  });
+
+  container.appendChild(logo);
+  container.appendChild(themeBtn);
+  headerSection.appendChild(container);
+}
+const heroSection = document.querySelector<HTMLElement>('#hero');
+
+if (heroSection) {
+  const container = document.createElement('div');
+  container.classList.add('container', 'hero');
+
+  const title = document.createElement('h1');
+  title.classList.add('hero__title');
+  title.textContent = 'Modern, Hızlı ve Ölçeklenebilir Arayüzler';
+
+  const desc = document.createElement('p');
+  desc.classList.add('hero__description');
+  desc.textContent = 'Sıfır bağımlılık ilkesiyle, Vanilla TypeScript ve modern SCSS mimarisi kullanılarak geliştirilmiş performans odaklı bileşen kütüphanesi. Projelerinize hız ve güvenilirlik katın.';
+
+  const actions = document.createElement('div');
+  actions.classList.add('hero__actions');
+
+  const ctaBtn = createButton({
+    text: 'Hemen Başla',
+    variant: 'primary',
+    onClick: () => {
+      const modalContent = document.createElement('p');
+      modalContent.textContent = "Kayıt formu ve detaylar çok yakında eklenecek!";
+      const modal = createModal({ title: 'Aramıza Katıl', content: modalContent });
+      document.body.appendChild(modal);
+    }
+  });
+
+  const githubBtn = createButton({
+    text: 'GitHub\'da İncele',
+    variant: 'outline',
+    onClick: () => window.open('https://github.com/iclalolkky/Challange', '_blank')
+  });
+
+  actions.appendChild(ctaBtn);
+  actions.appendChild(githubBtn);
+
+  container.appendChild(title);
+  container.appendChild(desc);
+  container.appendChild(actions);
+  heroSection.appendChild(container);
+}
+
+const featuresSection = document.querySelector<HTMLElement>('#features');
+
+if (featuresSection) {
+  const container = document.createElement('div');
+  container.classList.add('container', 'features__container');
+
+  const sectionTitle = document.createElement('h2');
+  sectionTitle.classList.add('features__title');
+  sectionTitle.textContent = 'Neden Bizi Seçmelisiniz?';
+
+  const grid = document.createElement('div');
+  grid.classList.add('features__grid');
+
+  const featuresData = [
+    { title: 'Modüler Mimari', description: 'BEM metodolojisi ile tamamen izole, bağımsız ve projenizin her yerinde tekrar kullanılabilir bileşenler.' },
+    { title: 'Dinamik Tema', description: 'Gelişmiş CSS değişkenleri sayesinde tek tıkla ve saniye gecikmesi olmadan aydınlık/karanlık mod geçişi.' },
+    { title: 'Tam Erişilebilirlik', description: 'Ekran okuyucular ve klavye navigasyonu için ARIA standartlarıyla %100 uyumlu kapsayıcı tasarım.' },
+    { title: 'Maksimum Tip Güvenliği', description: 'TypeScript\'in gücüyle hatasız, öngörülebilir ve derleme aşamasında korunan güvenilir kod altyapısı.' },
+    { title: 'Mobil Öncelikli (Responsive)', description: 'Özelleştirilebilir SCSS mixin\'leri ile akıllı telefonlardan dev ekranlara kadar her cihazda kusursuz görünüm.' },
+    { title: 'Sıfır Bağımlılık (Zero-Dependency)', description: 'Dış kütüphanelerin getirdiği yük ve güvenlik açıklarından uzak, sadece saf ve yüksek performanslı web teknolojileri.' }
+  ];
+
+  featuresData.forEach(feature => {
+    const card = createCard({ title: feature.title, description: feature.description });
+    grid.appendChild(card);
+  });
+
+  container.appendChild(sectionTitle);
+  container.appendChild(grid);
+  featuresSection.appendChild(container);
+}
+
+  const pricingSection = document.createElement('section');
+  pricingSection.classList.add('pricing');
+
+  const pricingData = [
+    { 
+      title: 'Başlangıç', 
+      price: 'Ücretsiz', 
+      features: ['Temel UI Bileşenleri', 'Topluluk Desteği', 'Kişisel Kullanım'], 
+      buttonText: 'Hemen Başla', 
+      isPopular: false 
+    },
+    { 
+      title: 'Profesyonel', 
+      price: '₺2000/ay', 
+      features: ['Tüm UI Bileşenleri', 'Öncelikli Destek', 'Ticari Kullanım', 'Karanlık Tema'], 
+      buttonText: 'Satın Al', 
+      isPopular: true 
+    },
+    { 
+      title: 'Kurumsal', 
+      price: 'Özel', 
+      features: ['Özel Çözümler', '7/24 Canlı Destek', 'Eğitim ve Kurulum', 'Sınırsız Lisans'], 
+      buttonText: 'Bize Ulaşın', 
+      isPopular: false 
+    }
+  ];
+
+  pricingSection.innerHTML = `
+    <div class="container pricing__container">
+      <h2 class="pricing__title">Fiyatlandırma Seçenekleri</h2>
+      <div class="pricing__grid">
+        ${pricingData.map(plan => `
+          <div class="card pricing__card ${plan.isPopular ? 'pricing__card--popular' : ''}">
+            ${plan.isPopular ? '<div class="pricing__badge">En Çok Tercih Edilen</div>' : ''}
+            <h3 class="pricing__tier">${plan.title}</h3>
+            <div class="pricing__price">${plan.price}</div>
+            <ul class="pricing__features">
+              ${plan.features.map(f => `<li>${f}</li>`).join('')}
+            </ul>
+            <button class="button ${plan.isPopular ? 'button--primary' : 'button--outline'} pricing__button">
+              ${plan.buttonText}
+            </button>
+          </div>
+        `).join('')}
+      </div>
     </div>
-    <p class="read-the-docs">
-      Click on the Vite and TypeScript logos to learn more
-    </p>
-  </div>
-`
+  `;
 
-setupCounter(document.querySelector<HTMLButtonElement>('#counter')!)
+ featuresSection?.insertAdjacentElement('afterend', pricingSection);
+
+const faqSectionEl = document.querySelector<HTMLElement>('#faq');
+
+if (faqSectionEl) {
+  const container = document.createElement('div');
+  container.classList.add('container', 'faq-section__container');
+
+  const sectionTitle = document.createElement('h2');
+  sectionTitle.classList.add('faq-section__title');
+  sectionTitle.textContent = 'Sıkça Sorulan Sorular';
+
+  const faqData = [
+    {
+      title: 'Bu platform ücretsiz mi?',
+      content: 'Evet, kullanılan tüm teknolojiler (Vite, TypeScript, SCSS) tamamen açık kaynaklı ve ücretsizdir.'
+    },
+    {
+      title: 'Hangi framework kullanıldı?',
+      content: 'Hiçbir framework kullanılmadı. Bu proje tamamen sıfır bağımlılık prensibine uygundur.'
+    },
+    {
+      title: 'Karanlık tema nasıl çalışıyor?',
+      content: 'CSS değişkenleri ve HTML root etiketindeki data-theme kullanılarak geçiş sağlanıyor.'
+    }
+  ];
+
+  const accordion = createAccordion(faqData);
+
+  container.appendChild(sectionTitle);
+  container.appendChild(accordion);
+  faqSectionEl.appendChild(container);
+}
+
+const footerSectionEl = document.querySelector<HTMLElement>('#footer');
+
+if (footerSectionEl) {
+  const container = document.createElement('div');
+  container.classList.add('container', 'footer__container');
+
+  const infoDiv = document.createElement('div');
+  infoDiv.classList.add('footer__info');
+  
+  const logo = document.createElement('div');
+  logo.classList.add('footer__logo');
+  logo.textContent = 'UI.Challenge';
+
+  const copyright = document.createElement('p');
+  copyright.classList.add('footer__copyright');
+  copyright.textContent = '© 2026 Tüm hakları saklıdır. İclal Olukkaya.';
+
+  infoDiv.appendChild(logo);
+  infoDiv.appendChild(copyright);
+
+  const newsletterDiv = document.createElement('div');
+  newsletterDiv.classList.add('footer__newsletter');
+
+  const newsletterTitle = document.createElement('h3');
+  newsletterTitle.textContent = 'Bültene Abone Olun';
+
+  const formDiv = document.createElement('div');
+  formDiv.classList.add('footer__newsletter-form');
+
+  const errorMsg = document.createElement('span');
+  errorMsg.style.color = '#ff6b6b';
+  errorMsg.style.fontSize = '0.85rem';
+  errorMsg.style.marginTop = '0.5rem';
+  errorMsg.style.display = 'block';
+  errorMsg.style.minHeight = '20px'; 
+  errorMsg.textContent = ''; 
+
+  const emailInput = createInput({
+    label: '', 
+    id: 'newsletter-email',
+    type: 'email',
+    placeholder: 'ornek@sirket.com',
+    required: true
+  });
+
+  const submitBtn = createButton({
+    text: 'Abone Ol',
+    variant: 'primary',
+    onClick: (e) => {
+      e.preventDefault(); 
+      
+      const inputEl = emailInput.querySelector('input');
+      if (!inputEl) return;
+
+      const emailValue = inputEl.value.trim();
+      
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+      if (emailValue === '') {
+        errorMsg.textContent = 'Lütfen bu alanı boş bırakmayınız.';
+        inputEl.style.borderColor = '#ff6b6b';
+        return;
+      }
+
+      if (!emailRegex.test(emailValue)) {
+        errorMsg.textContent = 'Lütfen geçerli bir e-posta adresi giriniz.';
+        inputEl.style.borderColor = '#ff6b6b';
+        return;
+      }
+
+      errorMsg.textContent = '';
+      inputEl.style.borderColor = '';
+      
+      const btnElement = e.currentTarget as HTMLButtonElement;
+      btnElement.textContent = 'Gönderiliyor...';
+      btnElement.disabled = true;
+      btnElement.style.opacity = '0.7';
+
+      setTimeout(() => {
+        btnElement.textContent = 'Abone Ol';
+        btnElement.disabled = false;
+        btnElement.style.opacity = '1';
+        inputEl.value = ''; 
+        const modalContent = document.createElement('p');
+        modalContent.textContent = "Bültenimize başarıyla abone oldunuz. Gelişmeleri e-posta adresinize göndereceğiz!";
+        const successModal = createModal({ title: 'Abonelik Başarılı !', content: modalContent });
+        document.body.appendChild(successModal);
+      }, 1500);
+    }
+  });
+
+  const inputContainer = document.createElement('div');
+  inputContainer.style.display = 'flex';
+  inputContainer.style.flexDirection = 'column';
+  inputContainer.style.flexGrow = '1';
+  
+  inputContainer.appendChild(emailInput);
+  inputContainer.appendChild(errorMsg);
+
+  formDiv.appendChild(inputContainer);
+  formDiv.appendChild(submitBtn);
+
+  newsletterDiv.appendChild(newsletterTitle);
+  newsletterDiv.appendChild(formDiv);
+
+  container.appendChild(infoDiv);
+  container.appendChild(newsletterDiv);
+  footerSectionEl.appendChild(container);
+  }

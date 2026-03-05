@@ -1,0 +1,19 @@
+:root {
+  /* Açık Tema (Varsayılan) */
+  --bg-color: #ffffff;
+  --text-color: #1f2937; 
+  --primary-color: #4f46e5; 
+  --primary-hover: #4338ca;
+  --border-color: #e5e7eb;
+  --card-bg: #f9fafb;
+}
+
+/* Karanlık tema */
+[data-theme="dark"] {
+  --bg-color: #111827;
+  --text-color: #f3f4f6;
+  --primary-color: #6366f1;
+  --primary-hover: #818cf8;
+  --border-color: #374151;
+  --card-bg: #1f2937;
+}
