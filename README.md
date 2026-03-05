@@ -52,5 +52,9 @@ Projeyi yerel bilgisayarınızda incelemek için aşağıdaki adımları izleyeb
 
 * Mimari kararlarımızın teknik detayları için [ADR-001](./docs/adr-001.md) belgesini inceleyebilirsiniz.
 * Projenin gelişim süreci ve sürüm notları için [CHANGELOG.md](CHANGELOG.md) dosyasına göz atabilirsiniz.
+## Performans ve Erişilebilirlik (Lighthouse)
+Proje, sıfır bağımlılık ve modern web standartları (Vanilla TS & SCSS) sayesinde tüm performans, erişilebilirlik, en iyi uygulamalar ve SEO testlerinden geçmiştir.
+
+![Lighthouse Performans Raporu](./docs/lighthouse.png)
 
 **Geliştirici:** İclal Olukkaya
